@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const userDb = {
   dbUsername: "test",
@@ -62,6 +63,7 @@ const ErrorMessage = styled.span`
   margin-bottom: 15px;
 `;
 export const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -83,7 +85,7 @@ export const Login = () => {
     }
 
     if (username === dbUsername && password === dbPw) {
-      alert("로그인 되었습니다!");
+      navigate("/");
     }
   };
 
@@ -116,11 +118,11 @@ export const Login = () => {
                 value: 8,
                 message: "패스워드는 8자리 이상 작성해 주세요",
               },
-              //   pattern: {
-              //     value: /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/,
-              //     message:
-              //       "패스워드는 8자리 이상 문자,숫자조합으로 작성하셔야됩니다.",
-              //   },
+              pattern: {
+                value: /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/,
+                message:
+                  "패스워드는 8자리 이상 문자,숫자조합으로 작성하셔야됩니다.",
+              },
             })}
             type="password"
             placeholder="패스워드"
